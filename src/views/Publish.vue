@@ -4,14 +4,12 @@
     <div class="left">
       <div class="post-name">我好想写点什么</div>
       <div class="post-type">
-        <input type="text" class="post-type-value" placeholder="选择一个频道" v-model="selectCommunity.name" @click="showCommunity()"/>
+        <input type="text" class="post-type-value" placeholder="选择一个频道" v-model="selectCommunity.name"
+          @click="showCommunity()" />
         <ul class="post-type-options" v-show="showCommunityList">
-          <li class="post-type-cell"
-            v-for="(community, index) in communityList"
-            :key="community.id"
-            @click="selected(index)"
-          >
-            {{community.name}}
+          <li class="post-type-cell" v-for="(community, index) in communityList" :key="community.id"
+            @click="selected(index)">
+            {{ community.name }}
           </li>
         </ul>
         <i class="p-icon"></i>
@@ -32,14 +30,7 @@
           </div>
           <!---此处放置富文本--->
           <div class="post-text-con">
-            <textarea
-              class="post-content-t"
-              id
-              cols="30"
-              rows="10"
-              v-model="content"
-              placeholder="内容"
-            ></textarea>
+            <textarea class="post-content-t" id cols="30" rows="10" v-model="content" placeholder="内容"></textarea>
           </div>
         </div>
         <div class="post-footer">
@@ -82,6 +73,9 @@ export default {
       this.$axios({
         method: "post",
         url: "/post",
+        headers: {
+          'Content-Type': 'application/json' // 设置请求头为 JSON
+        },
         data: JSON.stringify({
           title: this.title,
           content: this.content,
@@ -117,7 +111,7 @@ export default {
           console.log(error);
         });
     },
-    showCommunity(){
+    showCommunity() {
       this.showCommunityList = !this.showCommunityList;
     },
     selected(index) {
@@ -126,7 +120,7 @@ export default {
       console.log(this.selectCommunity)
     }
   },
-  mounted: function() {
+  mounted: function () {
     this.getCommunityList();
   }
 };
@@ -141,6 +135,7 @@ export default {
   margin: 0 auto;
   padding: 20px 24px;
   margin-top: 48px;
+
   .left {
     flex-grow: 1;
     max-width: 740px;
@@ -150,6 +145,7 @@ export default {
     margin-right: 12px;
     padding-bottom: 30px;
     position: relative;
+
     .post-name {
       padding: 4px;
       margin: 16px 0;
@@ -157,6 +153,7 @@ export default {
       display: -webkit-flex;
       display: flex;
       justify-content: space-between;
+
       .p-btn {
         font-size: 12px;
         font-weight: 700;
@@ -168,6 +165,7 @@ export default {
         margin-left: 10px;
         color: #0079d3;
       }
+
       .p-num {
         font-size: 12px;
         font-weight: 400;
@@ -179,6 +177,7 @@ export default {
         padding: 1px 3px;
       }
     }
+
     .post-type {
       position: relative;
       box-sizing: border-box;
@@ -191,6 +190,7 @@ export default {
       background-color: #ffffff;
       padding-left: 10px;
       position: relative;
+
       .post-type-value {
         font-size: 14px;
         font-weight: 500;
@@ -201,6 +201,7 @@ export default {
         background-color: transparent;
         cursor: pointer;
       }
+
       .post-type-options {
         position: absolute;
         width: 100%;
@@ -208,6 +209,7 @@ export default {
         left: 0;
         z-index: 1;
         border-radius: 4px;
+
         .post-type-cell {
           margin: 14px 8px 5px;
           font-size: 14px;
@@ -218,6 +220,7 @@ export default {
           cursor: pointer;
         }
       }
+
       .p-icon {
         width: 0;
         height: 0;
@@ -232,11 +235,13 @@ export default {
         cursor: pointer;
       }
     }
+
     .post-content {
       background-color: #ffffff;
       margin: 10px 0;
       padding-bottom: 15px;
       border-radius: 5px;
+
       .cat {
         display: flex;
         display: -webkit-flex;
@@ -244,6 +249,7 @@ export default {
         align-items: center;
         width: 100%;
         height: 53px;
+
         .cat-item {
           padding: 10px 0;
           width: 50%;
@@ -254,20 +260,25 @@ export default {
           border-bottom: 1px solid #edeff1;
           border-right: 1px solid #edeff1;
           color: #878a8c;
+
           .iconfont {
             margin-right: 4px;
           }
         }
+
         .active {
           color: #0079d3;
           font-weight: bolder;
           background: none;
         }
       }
+
       .post-sub-container {
         padding: 16px;
+
         .post-sub-header {
           position: relative;
+
           .post-title {
             resize: none;
             box-sizing: border-box;
@@ -284,6 +295,7 @@ export default {
             font-weight: 400;
             line-height: 40px;
           }
+
           .textarea-num {
             font-size: 10px;
             font-weight: 700;
@@ -297,11 +309,13 @@ export default {
             right: 12px;
           }
         }
+
         .post-text-con {
           width: 100%;
           height: 200px;
           border: 1px solid #edeff1;
           margin-top: 20px;
+
           .post-content-t {
             resize: none;
             box-sizing: border-box;
@@ -320,14 +334,17 @@ export default {
           }
         }
       }
+
       .post-footer {
         display: flex;
         display: -webkit-flex;
         margin: 0 16px;
         justify-content: flex-end;
+
         .sign {
           display: flex;
           display: -webkit-flex;
+
           .sign-item {
             list-style: none;
             padding: 5px 8px;
@@ -338,6 +355,7 @@ export default {
             font-weight: 700;
           }
         }
+
         .btns {
           .btn {
             border: 1px solid transparent;
@@ -358,6 +376,7 @@ export default {
           }
         }
       }
+
       .alias {
         background-color: #f6f7f8;
         border-radius: 0 0 6px 6px;
@@ -368,6 +387,7 @@ export default {
         flex-flow: column;
         padding: 8px 16px 21px;
         position: relative;
+
         .send-post {
           font-size: 14px;
           font-weight: 500;
@@ -375,6 +395,7 @@ export default {
           color: #1c1c1c;
           margin-right: 4px;
         }
+
         .connect {
           font-size: 14px;
           font-weight: 500;
@@ -387,19 +408,23 @@ export default {
       }
     }
   }
+
   .right {
     flex-grow: 0;
     width: 312px;
     margin-top: 62px;
+
     .post-rank {
       background-color: #ffffff;
       border-radius: 4px;
       margin-top: 15px;
       padding: 12px;
+
       .p-r-title {
         display: flex;
         display: -webkit-flex;
         align-items: center;
+
         .p-r-icon {
           width: 40px;
           height: 40px;
@@ -407,6 +432,7 @@ export default {
           background-size: cover;
           margin-right: 10px;
         }
+
         font-size: 16px;
         font-weight: 500;
         line-height: 20px;
@@ -418,10 +444,12 @@ export default {
         // display: -ms-flexbox;
         // display: flex;
       }
+
       .p-r-content {
         display: flex;
         display: -webkit-flex;
         flex-direction: column;
+
         .p-r-item {
           list-style: none;
           border-bottom: 1px solid #edeff1;
@@ -431,5 +459,4 @@ export default {
       }
     }
   }
-}
-</style>
+}</style>
